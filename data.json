@@ -1,0 +1,44 @@
+[
+    {
+        "name": "John Doe",
+        "pincode": 12345,
+        "subjects": ["Mathematics", "Science", "English"],
+        "rating": 4.8,
+        "reviews": 25
+    },
+    {
+        "name": "Jane Smith",
+        "pincode": 54321,
+        "subjects": ["History", "Geography", "Art"],
+        "rating": 4.5,
+        "reviews": 18
+    },
+    {
+        "name": "Jane Smith",
+        "pincode": 54321,
+        "subjects": ["History", "Geography", "Art"],
+        "rating": 4.6,
+        "reviews": 20
+    },
+    {
+        "name": "Jane Smith",
+        "pincode": 54321,
+        "subjects": ["History", "Geography", "Art"],
+        "rating": 4.7,
+        "reviews": 23
+    },
+    {
+        "name": "Jane Smith",
+        "pincode": 54321,
+        "subjects": ["History", "Geography", "Art"],
+        "rating": 4.7,
+        "reviews": 23
+    },
+    {
+        "name": "Jane Smith",
+        "pincode": 54321,
+        "subjects": ["History", "Geography", "Art"],
+        "rating": 4.7,
+        "reviews": 23
+    }
+]

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers Search</title>
+
+    <!-- Include Bootstrap CSS and other dependencies -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Add your CSS styles here for card design */
+        /* Updated CSS styles for teacher card design */
+/* Updated CSS styles for teacher card design */
+.teacher-card {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Rating styles */
+.star-rating {
+    color: #ffc107;
+    font-size: 1.25rem;
+}
+
+/* Reviews styles */
+.reviews {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+    </style>
+</head>
+<body>
+
+<!-- <nav class="navbar navbar-expand-lg bg-light navbar-light">
+    <a class="navbar-brand" href="#">Tech-Titans</a>
+</nav> -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>Tech-Titans</h2>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="courses.html" class="nav-item nav-link">Courses</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="team.html" class="dropdown-item">Our Team</a>
+                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    <a href="404.html" class="dropdown-item">404 Page</a>
+                </div>
+            </div>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
+        </div>
+        <!-- <a href="stuteac.html" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a> -->
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+            <h3>Search Your Teacher using pin code</h3>
+            <input type="number" id="pincode-input" class="form-control mb-2" placeholder="Enter pin code">
+            <button class="btn btn-primary" onclick="searchTeachers()">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row" id="teacher-cards">
+        <!-- Teacher cards will be displayed here dynamically -->
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and other dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function updateTeacherCard(teacher, cardContainer) {
+        // Create a new teacher card
+        const teacherCard = document.createElement("div");
+        teacherCard.className = "teacher-card";
+
+        // Update card content with teacher information
+        teacherCard.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${teacher.name}</h5>
+                    <p class="card-text">Subjects: ${teacher.subjects.join(", ")}</p>
+                    <p class="star-rating">&#9733; ${teacher.rating}</p>
+                <p class="reviews">${teacher.reviews} reviews</p>
+                </div>
+            </div>
+        `;
+
+        // Append the teacher card to the card container
+        cardContainer.appendChild(teacherCard);
+    }
+
+    function searchTeachers() {
+        // Replace this with the actual pin code input
+        const pincodeToSearch = parseInt(document.getElementById("pincode-input").value);
+
+        // Assuming you have a JSON file named data.json with an array of teachers
+        fetch("data.json")
+            .then((response) => response.json()) // Parse the response as JSON
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    const teacherCardsContainer = document.getElementById("teacher-cards");
+
+                    // Clear previous search results
+                    teacherCardsContainer.innerHTML = "";
+
+                    // Filter the data by pincode
+                    const teachersWithPincode = data.filter(
+                        (teacher) => teacher.pincode === pincodeToSearch
+                    );
+
+                    if (teachersWithPincode.length > 0) {
+                        // Create and display cards for each teacher
+                        teachersWithPincode.forEach((teacher) => {
+                            updateTeacherCard(teacher, teacherCardsContainer);
+                        });
+                    } else {
+                        teacherCardsContainer.innerHTML = "No teachers found with the specified pincode";
+                    }
+                } else {
+                    console.error("Data is not an array:", data);
+                }
+            })
+            .catch((error) => console.error("Error fetching data:", error));
+    }
+</script>
+</body>
+</html>
